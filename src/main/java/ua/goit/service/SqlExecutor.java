@@ -1,7 +1,6 @@
 package ua.goit.service;
 
 import ua.goit.model.Developer;
-import ua.goit.service.DbConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
