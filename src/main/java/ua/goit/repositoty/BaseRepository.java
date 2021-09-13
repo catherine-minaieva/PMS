@@ -8,26 +8,14 @@ import java.util.Optional;
 
 public interface BaseRepository <E extends BaseEntity<ID>, ID> {
 
-    default BaseRepository of(){
-        return new BaseRepositoryProxy(new BaseReposiroryImpl());
-    }
-
-    public E getOne(ID id);
-
-    public List<E> saveAll(Iterable<E> itrbl);
-
-    public Collection<E> findAll();
-
-    public void deleteAll();
+   public Collection<E> findAll();
 
     public void deleteById(ID id);
 
-    public long count();
-
-    public boolean existsById(ID id);
-
     public Optional<E> findById(ID id);
 
-    public E save(E e);
+    public E create(E e);
+
+    public E update(ID id, E e);
 
 }

@@ -27,10 +27,12 @@ public class Customer implements Serializable, BaseEntity<Long> {
     private String name;
 
     @Column(name = "tax_code")
-    private Long taxCode;
+    private String taxCode;
 
-    @Column(name = "company_id")
-    private Long companyId;
+    @Column(name = "head_office")
+    private String headOffice;
+
+
 
     @Override
     public Long getID() {
