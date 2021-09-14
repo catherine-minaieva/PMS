@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Data
@@ -18,6 +19,7 @@ import java.io.Serializable;
 
     public class Developer implements BaseEntity<Long>, Serializable {
 
+        @Serial
         private static final long serialVersionUID = 1928374651928374656L;
 
         @Id
@@ -33,8 +35,8 @@ import java.io.Serializable;
         @Column(name = "gender")
         private String gender;
 
-        @Column(name = "company_id")
-        private Long companyId;
+//        @Column(name = "company_id")
+//        private Long companyId;
 
         @Column(name = "salary")
         private Double salary;

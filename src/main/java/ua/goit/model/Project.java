@@ -28,11 +28,13 @@ public class Project implements Serializable, BaseEntity<Long> {
     private String name;
 
     @Column(name = "base_technology")
-    private List<String> baseTechnology;
+    private String baseTechnology;
+
+    @Column(name = "creation_date")
+    private String creationDate;
 
     @Column(name = "cost")
     private Long cost;
-
 
     @Override
     public Long getID() {

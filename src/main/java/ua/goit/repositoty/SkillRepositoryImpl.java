@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class SkillRepository implements BaseRepository<Skill, Long> {
+public class SkillRepositoryImpl implements BaseRepository<Skill, Long> {
 
     private final Connection CONNECTION = DbConnection.getInstance().getConnection();
     private final String SCHEMA_NAME = PropertiesLoader.getProperty("db.schemaName");

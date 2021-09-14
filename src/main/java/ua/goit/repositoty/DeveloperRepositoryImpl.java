@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class DeveloperRepository implements DeveloperRep{
+public class DeveloperRepositoryImpl implements DeveloperRepositoty {
 
     private final Connection CONNECTION = DbConnection.getInstance().getConnection();
     private final String SCHEMA_NAME = PropertiesLoader.getProperty("db.schemaName");
@@ -50,7 +50,6 @@ public class DeveloperRepository implements DeveloperRep{
                 .name(resultSet.getString("name"))
                 .age(resultSet.getInt("age"))
                 .gender(resultSet.getString("gender"))
-                .companyId(resultSet.getLong("company_id"))
                 .salary(resultSet.getDouble("salary"))
                 .build();
         return developer;
@@ -74,8 +73,7 @@ public class DeveloperRepository implements DeveloperRep{
         preparedStatement.setString(1, developer.getName());
         preparedStatement.setInt(2, developer.getAge());
         preparedStatement.setString(3, developer.getGender());
-        preparedStatement.setLong(6, developer.getCompanyId());
-        preparedStatement.setDouble(7, developer.getSalary());
+        preparedStatement.setDouble(4, developer.getSalary());
         preparedStatement.executeUpdate();
         return developer;
     }
