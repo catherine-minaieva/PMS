@@ -63,7 +63,7 @@ public class CustomerRepositoryImpl implements BaseRepository<Customer, Long> {
     @SneakyThrows
     @Override
     public Customer update(Long id, Customer customer) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE customers SET id=?, name=?, tax_code=?, head_office=? WHERE id=?"+ id);
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE customers SET id = ?, name=?, tax_code=?, head_office=? WHERE id=" + id + ";");
         return getCustomer(customer, preparedStatement);
     }
 

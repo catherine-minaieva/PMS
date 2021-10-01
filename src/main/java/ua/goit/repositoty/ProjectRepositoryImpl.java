@@ -57,22 +57,23 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @SneakyThrows
     @Override
     public Project create(Project project) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO " + SCHEMA_NAME + ".projects (name,cost,company_id,customer_id,first_date)" + " VALUES (?,?,?,?,?)");
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO " + SCHEMA_NAME + ".projects (id, name, base_technology, creation_date, cost)" + " VALUES (?,?,?,?,?)");
         return getProject(project, preparedStatement);
     }
 
     @SneakyThrows
     @Override
     public Project update(Long id, Project project) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE " + SCHEMA_NAME + ".projects set name=?,cost=?,company_id=?,customer_id=?,first_date=?  WHERE id=" + id + ";");
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE " + SCHEMA_NAME + ".projects set id =?, name=?,base_technology=?, creation_date=?, cost=?  WHERE id=" + id + ";");
         return getProject(project, preparedStatement);
     }
 
     private Project getProject(Project project, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, project.getName());
-        preparedStatement.setString(2, project.getBaseTechnology());
-        preparedStatement.setString(3, project.getCreationDate());
-        preparedStatement.setLong(4, project.getCost());
+        preparedStatement.setLong(1, project.getID());
+        preparedStatement.setString(2, project.getName());
+        preparedStatement.setString(3, project.getBaseTechnology());
+        preparedStatement.setString(4, project.getCreationDate());
+        preparedStatement.setLong(5, project.getCost());
         preparedStatement.executeUpdate();
         return project;
     }

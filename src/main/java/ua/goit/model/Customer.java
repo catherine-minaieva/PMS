@@ -32,8 +32,6 @@ public class Customer implements Serializable, BaseEntity<Long> {
     @Column(name = "head_office")
     private String headOffice;
 
-
-
     @Override
     public Long getID() {
         return id;
