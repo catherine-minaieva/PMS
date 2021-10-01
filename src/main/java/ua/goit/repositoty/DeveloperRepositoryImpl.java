@@ -58,22 +58,23 @@ public class DeveloperRepositoryImpl implements DeveloperRepositoty {
     @SneakyThrows
     @Override
     public Developer create(Developer developer) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO " + SCHEMA_NAME + ".developers (name,age,gender,company_id,salary)" + " VALUES (?,?,?,?,?)");
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO " + SCHEMA_NAME + ".developers (id, name,age,gender,salary)" + " VALUES (?,?,?,?,?)");
         return updateDeveloper(developer, preparedStatement);
     }
 
         @SneakyThrows
     @Override
     public Developer update(Long id, Developer developer) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE " + SCHEMA_NAME + ".developers set name=?, age=?, gender=?,company_id=?, salary=? WHERE id=" + id + ";");
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE " + SCHEMA_NAME + ".developers set id=?, name=?, age=?, gender=?, salary=? WHERE id=" + id + ";");
         return updateDeveloper(developer, preparedStatement);
     }
 
     private Developer updateDeveloper(Developer developer, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, developer.getName());
-        preparedStatement.setInt(2, developer.getAge());
-        preparedStatement.setString(3, developer.getGender());
-        preparedStatement.setDouble(4, developer.getSalary());
+        preparedStatement.setLong(1, developer.getID());
+        preparedStatement.setString(2, developer.getName());
+        preparedStatement.setInt(3, developer.getAge());
+        preparedStatement.setString(4, developer.getGender());
+        preparedStatement.setDouble(5, developer.getSalary());
         preparedStatement.executeUpdate();
         return developer;
     }

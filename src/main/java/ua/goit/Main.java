@@ -1,6 +1,6 @@
 package ua.goit;
 
-import ua.goit.model.Company;
+import ua.goit.model.*;
 import ua.goit.repositoty.*;
 import ua.goit.service.SqlExecutor;
 
@@ -27,8 +27,35 @@ public class Main {
         System.out.println(customerRepository.findById(2L));
         System.out.println(projectRepository.findById(2L));
         System.out.println(skillRepository.findById(2L));
+        System.out.println("------------------------------------------------------------------------------");
 
-        companyRepository.create(new Company(6L,  "Sigma","Lviv"));
+//        companyRepository.deleteById(2L);
+//        System.out.println(companyRepository.findAll());
+//
+//        developerRepository.deleteById(1l);
+//        System.out.println(developerRepository.findAll());
+//
+//        customerRepository.deleteById(10l);
+//        System.out.println(customerRepository.findAll());
+//
+//        projectRepository.deleteById(1l);
+//        System.out.println(projectRepository.findAll());
+//
+//        skillRepository.deleteById(1l);
+//        System.out.println("------------------------------------------------------------------------------");
+
+//        System.out.println(companyRepository.create(new Company(2L,  "Nova","Helsinki")));
+//        companyRepository.update(2L,  new Company(2L, "Nova", "Poltava"));
+//
+//        System.out.println(developerRepository.create(new Developer(1L,"Dana", 48, "women", 2000D)));
+//        developerRepository.update(12L, new Developer(12l, "Lera", 26, "women", 2000D));
+
+        //System.out.println(customerRepository.create(new Customer(7L, "Buildery", "3543215441", "London" )));
+        customerRepository.update(7L, new Customer(7L, "Integrity", "3543215441", "London"));
+        //System.out.println(projectRepository.create(new Project()));
+
+
+        //System.out.println(developerRepository.getDevelopersByLevel("junior"));
     }
 }
 

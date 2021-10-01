@@ -56,14 +56,14 @@ public class CustomerRepositoryImpl implements BaseRepository<Customer, Long> {
     @SneakyThrows
     @Override
     public Customer create(Customer customer) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO customers(id, name, tax_code, head_office) VALUES (?, ?, ?)");
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO customers(id, name, tax_code, head_office) VALUES (?, ?, ?, ?)");
         return getCustomer(customer, preparedStatement);
     }
 
     @SneakyThrows
     @Override
     public Customer update(Long id, Customer customer) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE customers SET name=?, tax_code=?, head_office=? WHERE id=?");
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE customers SET id=?, name=?, tax_code=?, head_office=? WHERE id=?"+ id);
         return getCustomer(customer, preparedStatement);
     }
 
@@ -74,9 +74,10 @@ public class CustomerRepositoryImpl implements BaseRepository<Customer, Long> {
     }
 
     private Customer getCustomer(Customer customer, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, customer.getName());
-        preparedStatement.setString(2, customer.getTaxCode());
-        preparedStatement.setString(3, customer.getHeadOffice());
+        preparedStatement.setLong(1, customer.getID());
+        preparedStatement.setString(2, customer.getName());
+        preparedStatement.setString(3, customer.getTaxCode());
+        preparedStatement.setString(4, customer.getHeadOffice());
         preparedStatement.executeUpdate();
         return customer;
     }

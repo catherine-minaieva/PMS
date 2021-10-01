@@ -38,7 +38,8 @@ public class CompanyRepositoryImpl implements BaseRepository<Company, Long> {
     public void deleteById(Long id) {
         CONNECTION
                 .createStatement()
-                .execute("DELETE FROM  " + SCHEMA_NAME + ".companies  WHERE id=" + id);
+                .execute("DELETE FROM " + SCHEMA_NAME + ".companies" +
+                         " WHERE id=" + id);
     }
 
     @SneakyThrows
@@ -59,9 +60,10 @@ public class CompanyRepositoryImpl implements BaseRepository<Company, Long> {
     @SneakyThrows
     @Override
     public Company create(Company company) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO " + SCHEMA_NAME + ".companies (name,head_office) VALUES (?,?) ;");
-        preparedStatement.setString(1, company.getName());
-        preparedStatement.setString(2, company.getHeadOffice());
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("INSERT INTO " + SCHEMA_NAME + ".companies (id, name,head_office) VALUES (?,?,?) ;");
+        preparedStatement.setLong(1, company.getID());
+        preparedStatement.setString(2, company.getName());
+        preparedStatement.setString(3, company.getHeadOffice());
         preparedStatement.executeUpdate();
         return company;
     }
@@ -69,7 +71,7 @@ public class CompanyRepositoryImpl implements BaseRepository<Company, Long> {
     @SneakyThrows
     @Override
     public Company update(Long id, Company company) {
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE  " + SCHEMA_NAME + ".companies SET name=?,total_cost_projects=?  WHERE id=" + id + ";");
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE  " + SCHEMA_NAME + ".companies SET name=?,head_office=?  WHERE id=" + id + ";");
         preparedStatement.setString(1, company.getName());
         preparedStatement.setString(2, company.getHeadOffice());
         preparedStatement.execute();
