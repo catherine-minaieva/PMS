@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class ProjectRepositoryImpl implements ProjectRepository {
+public class ProjectRepositoryImpl implements BaseRepository<Project, Long> {
 
     private final Connection CONNECTION = DbConnection.getInstance().getConnection();
     private final String SCHEMA_NAME = PropertiesLoader.getProperty("db.schemaName");
@@ -83,17 +83,4 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     public void deleteById(Long id) {
         CONNECTION.createStatement().execute("DELETE FROM " + SCHEMA_NAME + ".projects WHERE id=" + id);
     }
-
-    @Override
-    public List<String> getProjectsWithDate() {
-//        Collection<Project> all = new ProjectRepository().findAll();
-//        final List<String> projectsWithDate = new ArrayList<>();
-//        for (int i = 1; i <= all.size(); i++) {
-//            final String name = all.get(i - 1).getName();
-//            final String date = all.get(i - 1).getCreationDate();
-//            final long size = new DeveloperRepository().getDevelopersOfProject((long) i).size();
-//            projectsWithDate.add(name + ", " + size + ", " + date);
-//        }
-       return null;
-   }
 }

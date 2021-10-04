@@ -7,12 +7,13 @@ import ua.goit.service.SqlExecutor;
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         DeveloperRepositoryImpl developerRepository = new DeveloperRepositoryImpl();
         CompanyRepositoryImpl companyRepository = new CompanyRepositoryImpl();
         CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
         ProjectRepositoryImpl projectRepository = new ProjectRepositoryImpl();
         SkillRepositoryImpl skillRepository = new SkillRepositoryImpl();
+        QueryRepositotyImpl queryRepositoty = new QueryRepositotyImpl();
 
 
         System.out.println(developerRepository.findAll());
@@ -54,9 +55,12 @@ public class Main {
         //customerRepository.update(7L, new Customer(7L,"Integrity", "3543215441", "London"));
 
         //System.out.println(projectRepository.create(new Project(6L, "Agregator", "C#", "01.10.2021", 260000L)));
-projectRepository.update(6L, new Project(6L, "VideoGuard", "JavaScript", "02.10.2021", 300000L));
+        //projectRepository.update(6L, new Project(6L, "VideoGuard", "JavaScript", "02.10.2021", 300000L));
 
-        //System.out.println(developerRepository.getDevelopersByLevel("junior"));
+//System.out.println(queryRepositoty.getSumOfSalariesForProject(3L));
+        System.out.println(queryRepositoty.getProjectsWithDate());
+        System.out.println(queryRepositoty.getDevelopersOfProject(3L));
+        //System.out.println(queryRepositoty.getDevelopersByLanguage("java"));
     }
 }
 
