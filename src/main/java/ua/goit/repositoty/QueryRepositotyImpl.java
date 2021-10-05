@@ -113,7 +113,7 @@ public class QueryRepositotyImpl implements QueryRepository {
         PreparedStatement preparedStatement = CONNECTION.prepareStatement("SELECT" +
                 " creation_date," +
                 " projects.name," +
-                " COUNT(developers.name) AS count_of_devs" +
+                " COUNT(developers.name) AS devs_quantity" +
                 " FROM " + SCHEMA_NAME + ".projects" +
                 " INNER JOIN " + SCHEMA_NAME + ".developers_projects" +
                 " ON developers_projects.project_id = projects.id" +
@@ -122,16 +122,16 @@ public class QueryRepositotyImpl implements QueryRepository {
                 " GROUP BY projects.name,creation_date"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
-        String result = ("Creation Date - projectName - developers\n");
+        String projects = "";
         while (resultSet.next()) {
-            result = String.join("",
-                    result,
+            projects = String.join("",
+                    projects,
                     String.join(" - ",
                             resultSet.getString("creation_date"),
                             resultSet.getString("projects.name"),
-                            resultSet.getString("count_of_devs") + "\n"
+                            resultSet.getString("devs_quantity")
                     ));
         }
-        return result;
+        return projects;
     }
 }
