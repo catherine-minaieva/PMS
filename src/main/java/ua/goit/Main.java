@@ -51,16 +51,17 @@ public class Main {
 //        System.out.println(developerRepository.create(new Developer(1L,"Dana", 48, "women", 2000D)));
 //        developerRepository.update(12L, new Developer(12l, "Lera", 26, "women", 2000D));
 
-        //System.out.println(customerRepository.create(new Customer(7L, "Buildery", "3543215441", "London" )));
-        //customerRepository.update(7L, new Customer(7L,"Integrity", "3543215441", "London"));
+//        System.out.println(customerRepository.create(new Customer(7L, "Buildery", "3543215441", "London" )));
+//        customerRepository.update(7L, new Customer(7L,"Integrity", "3543215441", "London"));
+//
+//        System.out.println(projectRepository.create(new Project(6L, "Agregator", "C#", "01.10.2021", 260000L)));
+//        projectRepository.update(6L, new Project(6L, "VideoGuard", "JavaScript", "02.10.2021", 300000L));
 
-        //System.out.println(projectRepository.create(new Project(6L, "Agregator", "C#", "01.10.2021", 260000L)));
-        //projectRepository.update(6L, new Project(6L, "VideoGuard", "JavaScript", "02.10.2021", 300000L));
-
-//System.out.println(queryRepositoty.getSumOfSalariesForProject(3L));
+        System.out.println(queryRepositoty.getSumOfSalariesForProject(2L));
         System.out.println(queryRepositoty.getProjectsWithDate());
         System.out.println(queryRepositoty.getDevelopersOfProject(3L));
-        //System.out.println(queryRepositoty.getDevelopersByLanguage("java"));
+        System.out.println(queryRepositoty.getDevelopersByLanguage("java"));
+        System.out.println(queryRepositoty.getDevelopersByLevel("middle"));
     }
 }
 

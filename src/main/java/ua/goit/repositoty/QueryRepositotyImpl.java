@@ -2,7 +2,6 @@ package ua.goit.repositoty;
 
 import lombok.SneakyThrows;
 import ua.goit.model.Developer;
-import ua.goit.model.Project;
 import ua.goit.service.DbConnection;
 import ua.goit.util.PropertiesLoader;
 
@@ -13,29 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryRepositotyImpl implements QueryRepository{
+public class QueryRepositotyImpl implements QueryRepository {
 
     private final Connection CONNECTION = DbConnection.getInstance().getConnection();
     private final String SCHEMA_NAME = PropertiesLoader.getProperty("db.schemaName");
-
-    @SneakyThrows
-    @Override
-    public Double getSumOfSalariesForProject(Long projectId) {
-        ResultSet resultSet = CONNECTION.createStatement().executeQuery( "SELECT projects.name, sum(salary) as salary " +
-                " FROM "+SCHEMA_NAME+".developers " +
-                        " INNER JOIN "+SCHEMA_NAME+".developers_projects " +
-                        " ON developers_projects.developer_id = developers.id " +
-                        " INNER JOIN "+SCHEMA_NAME+".projects " +
-                        " ON developers_projects.project_id = projects.id " +
-                        " WHERE projects.id=?" +
-                        " GROUP BY projects.name"
-        );
-        List<String> totalSalaries = new ArrayList<>();
-        while (resultSet.next()) {
-            totalSalaries.add((int) resultSet.getLong("projectID") - 1, (resultSet.getString("projectName") + " = " + resultSet.getDouble("sumSalaries")));
-        }
-        return Double.valueOf(totalSalaries.get(Math.toIntExact(projectId) - 1));
-    }
 
     @SneakyThrows
     @Override
@@ -57,46 +37,38 @@ public class QueryRepositotyImpl implements QueryRepository{
     @SneakyThrows
     @Override
     public List<Developer> getDevelopersByLanguage(String language) {
-        final List<Developer> developersList = new ArrayList<>();
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("SELECT" +
-                " developers.name" +
-                " FROM "+SCHEMA_NAME+".developers" +
-                " INNER JOIN "+SCHEMA_NAME+".developers_skills" +
-                " ON developers_skills.developer_id = developers.id" +
-                " INNER JOIN "+SCHEMA_NAME+".skills" +
-                " ON developers_skills.skill_id = skills.id" +
-                " WHERE skills.language=?");
-        preparedStatement.setString(1, language);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            Developer developer = buildDeveloper(resultSet);
-            developersList.add(developer);
-        }
-        return developersList;
-           }
+        String getAllDevelopersByLanguage =
+                """
+                        SELECT d.id, d.name, d.gender, d.age, d.salary
+                        FROM developers d
+                        JOIN developers_skills ds ON d.id = ds.developer_id
+                        JOIN skills s ON ds.skill_id = s.id
+                        WHERE s.language = ?GROUP BY d.id;""";
+        return getDevelopers(language, getAllDevelopersByLanguage);
+    }
 
     @SneakyThrows
     @Override
     public List<Developer> getDevelopersByLevel(String level) {
-        final List<Developer> developersList = new ArrayList<>();
-        PreparedStatement preparedStatement = CONNECTION.prepareStatement("SELECT" +
-                " developers.name" +
-                " FROM "+SCHEMA_NAME+".developers" +
-                " INNER JOIN "+SCHEMA_NAME+".developers_skills" +
-                " ON developers_skills.developer_id = developers.id" +
-                " INNER JOIN "+SCHEMA_NAME+".skills" +
-                " ON developers_skills.skill_id = skills.id" +
-                " WHERE skills.skill_level=?");
-        preparedStatement.setString(1, level);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        String developersByLevel =
+                """
+                        SELECT d.id, d.name, d.gender, d.age, d.salary
+                        FROM developers d
+                        JOIN developers_skills ds ON d.id = ds.developer_id
+                        JOIN skills s ON ds.skill_id = s.id
+                        WHERE s.level = ?GROUP BY d.id;""";
+        return getDevelopers(level, developersByLevel);
+    }
+
+    private List<Developer> getDevelopers(String level, String developersByLevel) throws SQLException {
+        List<Developer> developersList = new ArrayList<>();
+
+        PreparedStatement statement = CONNECTION.prepareStatement(developersByLevel);
+        statement.setString(1, level);
+
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            final Developer developer = Developer.builder()
-                    .id(resultSet.getLong("id"))
-                    .name(resultSet.getString("name"))
-                    .age(resultSet.getInt("age"))
-                    .gender(resultSet.getString("gender"))
-                    .salary(resultSet.getDouble("salary"))
-                    .build();
+            Developer developer = buildDeveloper(resultSet);
             developersList.add(developer);
         }
         return developersList;
@@ -115,32 +87,51 @@ public class QueryRepositotyImpl implements QueryRepository{
     }
 
     @SneakyThrows
-    @Override
-    public List<Project> getProjectsWithDate() {
-        final List<Project> projectList = new ArrayList<>();
+    public String getSumOfSalariesForProject(Long id) {
         PreparedStatement preparedStatement = CONNECTION.prepareStatement(
-                "SELECT" +
-                        " creation_date," +
-                        " projects.name," +
-                        " COUNT(developers.name) AS count_of_devs" +
-                        " FROM "+SCHEMA_NAME+".projects" +
-                        " INNER JOIN "+SCHEMA_NAME+".developers_projects" +
-                        " ON developers_projects.project_id = projects.id" +
-                        " INNER JOIN "+SCHEMA_NAME+".developers" +
-                        " ON developers_projects.developer_id = developers.id" +
-                        " GROUP BY projects.name,creation_date"
-        );
+                "SELECT projects.name, sum(salary) as salary " +
+                        " FROM " + SCHEMA_NAME + ".developers " +
+                        " INNER JOIN " + SCHEMA_NAME + ".developers_projects " +
+                        " ON developers_projects.developer_id = developers.id " +
+                        " INNER JOIN " + SCHEMA_NAME + ".projects " +
+                        " ON developers_projects.project_id = projects.id " +
+                        " WHERE projects.id=?" +
+                        " GROUP BY projects.name");
+        preparedStatement.setLong(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            final Project project = Project.builder()
-                    .id(resultSet.getLong("id"))
-                    .name(resultSet.getString("name"))
-                    .baseTechnology(resultSet.getString("base_technology"))
-                    .creationDate(resultSet.getString("creation_date"))
-                    .cost(resultSet.getLong("cost"))
-                    .build();
-            projectList.add(project);
+            return String.format("Salary of the project %s - %s",
+                    resultSet.getString("projects.name"),
+                    resultSet.getString("salary"));
         }
-        return projectList;
+        return null;
+    }
+
+    @SneakyThrows
+    @Override
+    public String getProjectsWithDate() {
+        PreparedStatement preparedStatement = CONNECTION.prepareStatement("SELECT" +
+                " creation_date," +
+                " projects.name," +
+                " COUNT(developers.name) AS count_of_devs" +
+                " FROM " + SCHEMA_NAME + ".projects" +
+                " INNER JOIN " + SCHEMA_NAME + ".developers_projects" +
+                " ON developers_projects.project_id = projects.id" +
+                " INNER JOIN " + SCHEMA_NAME + ".developers" +
+                " ON developers_projects.developer_id = developers.id" +
+                " GROUP BY projects.name,creation_date"
+        );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        String result = ("Creation Date - projectName - developers\n");
+        while (resultSet.next()) {
+            result = String.join("",
+                    result,
+                    String.join(" - ",
+                            resultSet.getString("creation_date"),
+                            resultSet.getString("projects.name"),
+                            resultSet.getString("count_of_devs") + "\n"
+                    ));
+        }
+        return result;
     }
 }
