@@ -1,10 +1,6 @@
 package ua.goit;
 
-import ua.goit.model.*;
 import ua.goit.repositoty.*;
-import ua.goit.service.SqlExecutor;
-
-import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {

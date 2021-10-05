@@ -1,4 +1,4 @@
-package ua.goit.service;
+package ua.goit.config;
 
 import lombok.SneakyThrows;
 import ua.goit.util.PropertiesLoader;

@@ -2,7 +2,7 @@ package ua.goit.repositoty;
 
 import lombok.SneakyThrows;
 import ua.goit.model.Company;
-import ua.goit.service.DbConnection;
+import ua.goit.config.DbConnection;
 import ua.goit.util.PropertiesLoader;
 
 import java.sql.Connection;
