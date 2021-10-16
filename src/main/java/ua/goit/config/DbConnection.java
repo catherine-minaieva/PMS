@@ -18,7 +18,7 @@ public class DbConnection implements Closeable {
     private Connection connection;
 
     @SneakyThrows
-    private DbConnection() {
+    public DbConnection() {
         Class.forName(JDBC_DRIVER);
         this.connection = DriverManager.getConnection(URL, username, password);
     }

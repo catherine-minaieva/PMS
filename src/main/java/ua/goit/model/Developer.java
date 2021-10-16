@@ -35,9 +35,6 @@ import java.io.Serializable;
         @Column(name = "gender")
         private String gender;
 
-//        @Column(name = "company_id")
-//        private Long companyId;
-
         @Column(name = "salary")
         private Double salary;
 

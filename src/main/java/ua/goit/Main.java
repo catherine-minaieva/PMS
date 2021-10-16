@@ -1,30 +1,32 @@
 package ua.goit;
 
-import ua.goit.repositoty.*;
+import ua.goit.Controller.MainController;
+import ua.goit.View.Console;
+import ua.goit.View.View;
 
 public class Main {
     public static void main(String[] args) {
-        DeveloperRepositoryImpl developerRepository = new DeveloperRepositoryImpl();
-        CompanyRepositoryImpl companyRepository = new CompanyRepositoryImpl();
-        CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
-        ProjectRepositoryImpl projectRepository = new ProjectRepositoryImpl();
-        SkillRepositoryImpl skillRepository = new SkillRepositoryImpl();
-        QueryRepositotyImpl queryRepositoty = new QueryRepositotyImpl();
-
-
-        System.out.println(developerRepository.findAll());
-        System.out.println(companyRepository.findAll());
-        System.out.println(customerRepository.findAll());
-        System.out.println(projectRepository.findAll());
-        System.out.println(skillRepository.findAll());
-        System.out.println("------------------------------------------------------------------------------");
-
-        System.out.println(developerRepository.findById(2L));
-        System.out.println(companyRepository.findById(2L));
-        System.out.println(customerRepository.findById(2L));
-        System.out.println(projectRepository.findById(2L));
-        System.out.println(skillRepository.findById(2L));
-        System.out.println("------------------------------------------------------------------------------");
+//        DeveloperRepositoryImpl developerRepository = new DeveloperRepositoryImpl();
+//        CompanyRepositoryImpl companyRepository = new CompanyRepositoryImpl();
+//        CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
+//        ProjectRepositoryImpl projectRepository = new ProjectRepositoryImpl();
+//        SkillRepositoryImpl skillRepository = new SkillRepositoryImpl();
+//        QueryRepositotyImpl queryRepositoty = new QueryRepositotyImpl();
+//
+//
+//        System.out.println(developerRepository.findAll());
+//        System.out.println(companyRepository.findAll());
+//        System.out.println(customerRepository.findAll());
+//        System.out.println(projectRepository.findAll());
+//        System.out.println(skillRepository.findAll());
+//        System.out.println("------------------------------------------------------------------------------");
+//
+//        System.out.println(developerRepository.findById(2L));
+//        System.out.println(companyRepository.findById(2L));
+//        System.out.println(customerRepository.findById(2L));
+//        System.out.println(projectRepository.findById(2L));
+//        System.out.println(skillRepository.findById(2L));
+//        System.out.println("------------------------------------------------------------------------------");
 
 //        companyRepository.deleteById(2L);
 //        System.out.println(companyRepository.findAll());
@@ -53,11 +55,15 @@ public class Main {
 //        System.out.println(projectRepository.create(new Project(6L, "Agregator", "C#", "01.10.2021", 260000L)));
 //        projectRepository.update(6L, new Project(6L, "VideoGuard", "JavaScript", "02.10.2021", 300000L));
 
-        System.out.println(queryRepositoty.getSumOfSalariesForProject(2L));
-        System.out.println(queryRepositoty.getProjectsWithDate());
-        System.out.println(queryRepositoty.getDevelopersOfProject(3L));
-        System.out.println(queryRepositoty.getDevelopersByLanguage("java"));
-        System.out.println(queryRepositoty.getDevelopersByLevel("middle"));
+//        System.out.println(queryRepositoty.getSumOfSalariesForProject(2L));
+//        System.out.println(queryRepositoty.getProjectsWithDate());
+//        System.out.println(queryRepositoty.getDevelopersOfProject(3L));
+//        System.out.println(queryRepositoty.getDevelopersByLanguage("java"));
+//        System.out.println(queryRepositoty.getDevelopersByLevel("middle"));
+//    }
+        View view = new Console();
+        MainController mainController = new MainController(view);
+        mainController.read();
     }
 }
 
