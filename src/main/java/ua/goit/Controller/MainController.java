@@ -2,6 +2,10 @@ package ua.goit.Controller;
 
 import ua.goit.View.InputString;
 import ua.goit.View.View;
+import ua.goit.exeption.ExitException;
+import ua.goit.repositoty.DeveloperRepositoryImpl;
+import ua.goit.service.DeveloperServiceImpl;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,18 +15,20 @@ public class MainController {
 
     public MainController(View view) {
         this.view = view;
+        DeveloperServiceImpl developerService = new DeveloperServiceImpl(new DeveloperRepositoryImpl());
         this.commands = Arrays.asList(
-                new CreateDeveloper(view),
+                new CreateDeveloper(view, developerService),
                 new Exit(view)
         );
     }
 
     public void read() {
-        view.write("Welcome to Project Management System!");
+        view.write("Hello");
         view.write("Enter a command:");
         try {
             doCommand();
-        } catch (RuntimeException e) {
+        } catch (ExitException e) {
+
         }
     }
 
@@ -37,7 +43,11 @@ public class MainController {
                         break;
                     }
                 } catch (Exception e) {
-                    throw e;
+                    if (e instanceof ExitException) {
+                        throw e;
+                    }
+                    printError(e);
+                    break;
                 }
             }
         }

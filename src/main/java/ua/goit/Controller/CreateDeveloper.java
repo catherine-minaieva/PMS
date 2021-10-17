@@ -10,7 +10,7 @@ public class CreateDeveloper implements Command {
     private View view;
     private DeveloperServiceImpl service;
 
-    public CreateDeveloper(View view) {
+    public CreateDeveloper(View view, DeveloperServiceImpl service) {
         this.view = view;
         this.service = service;
     }

@@ -2,14 +2,13 @@ package ua.goit.service;
 
 import ua.goit.View.InputString;
 import ua.goit.model.Developer;
-import ua.goit.model.Gender;
 import ua.goit.repositoty.DeveloperRepositoryImpl;
 
 import java.util.List;
 
 public class DeveloperServiceImpl implements DeveloperService{
 
-    private DeveloperRepositoryImpl repository;
+    private final DeveloperRepositoryImpl repository;
 
     public DeveloperServiceImpl(DeveloperRepositoryImpl repository){
         this.repository = repository;
@@ -32,12 +31,10 @@ public class DeveloperServiceImpl implements DeveloperService{
 
     @Override
     public void update(Developer developer) {
-
     }
 
     @Override
     public void delete(Long ID) {
-
     }
 
     @Override
@@ -48,12 +45,14 @@ public class DeveloperServiceImpl implements DeveloperService{
     public Developer mapDeveloper(InputString input) {
         String[] parameters = input.getParameters();
 
-        String name = parameters[1];
-        int age = Integer.parseInt(parameters[2]);
-        String gender = (parameters[3]);
-        Double salary = Double.parseDouble(parameters[4]);
+        Long id  = Long.parseLong(parameters[1]);
+        String name = parameters[2];
+        int age = Integer.parseInt(parameters[3]);
+        String gender = (parameters[4]);
+        Double salary = Double.parseDouble(parameters[5]);
 
         Developer developer = new Developer();
+        developer.setId(id);
         developer.setName(name);
         developer.setAge(age);
         developer.setGender(gender);
