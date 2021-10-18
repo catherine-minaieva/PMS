@@ -35,6 +35,7 @@ public class DeveloperServiceImpl implements DeveloperService{
 
     @Override
     public void delete(Long ID) {
+        repository.deleteById(ID);
     }
 
     @Override
