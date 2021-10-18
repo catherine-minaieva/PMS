@@ -4,6 +4,7 @@ import ua.goit.View.InputString;
 import ua.goit.model.Developer;
 import ua.goit.repositoty.DeveloperRepositoryImpl;
 
+import java.util.Collection;
 import java.util.List;
 
 public class DeveloperServiceImpl implements DeveloperService{
@@ -21,12 +22,14 @@ public class DeveloperServiceImpl implements DeveloperService{
 
     @Override
     public List<Developer> findAll() {
-        return null;
+        Collection<Developer> all = repository.findAll();
+        return (List<Developer>) all;
     }
 
     @Override
     public void create(Developer developer) {
- repository.create(developer);
+
+        repository.create(developer);
     }
 
     @Override

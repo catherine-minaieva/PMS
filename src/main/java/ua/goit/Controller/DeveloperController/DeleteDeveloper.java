@@ -1,11 +1,12 @@
-package ua.goit.Controller;
+package ua.goit.Controller.DeveloperController;
 
+import ua.goit.Controller.Command;
 import ua.goit.View.Commands;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
 import ua.goit.model.Developer;
 import ua.goit.repositoty.DeveloperRepositoryImpl;
-import ua.goit.service.DeveloperServiceImpl;
+
 
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class DeleteDeveloper implements Command {
         Long developerID = Long.parseLong(view.read());
         Optional<Developer> developer = developerRepository.findById(developerID);
 
-        if (developer == null)
+        if (!developer.isPresent())
             throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
 
         developerRepository.deleteById(developerID);

@@ -1,5 +1,8 @@
 package ua.goit.Controller;
 
+import ua.goit.Controller.DeveloperController.CreateDeveloper;
+import ua.goit.Controller.DeveloperController.DeleteDeveloper;
+import ua.goit.Controller.DeveloperController.GetAllDevelopers;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
 import ua.goit.exeption.ExitException;
@@ -20,6 +23,7 @@ public class MainController {
         this.commands = Arrays.asList(
                 new CreateDeveloper(view, developerService),
                 new DeleteDeveloper(view, developerRepository),
+                new GetAllDevelopers(view, developerService),
                 new Exit(view)
         );
     }
