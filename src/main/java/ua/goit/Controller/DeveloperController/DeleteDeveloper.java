@@ -27,10 +27,10 @@ public class DeleteDeveloper implements Command {
     @Override
     public void process(InputString input) {
 
-        Long developerID = Long.parseLong(view.read());
+        Long developerID = Long.parseLong(String.valueOf((input)));
         Optional<Developer> developer = developerRepository.findById(developerID);
 
-        if (!developer.isPresent())
+        if (developer.isEmpty())
             throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
 
         developerRepository.deleteById(developerID);

@@ -23,6 +23,6 @@ public class GetAllDevelopers implements Command {
 
     @Override
     public void process(InputString input) {
-    service.findAll();
+    service.findAll().forEach(System.out::println);
     }
 }
