@@ -9,7 +9,7 @@ public interface BaseService<T extends BaseEntity> {
     List<T> findAll();
 
     void create(T t);
-    void update(T t);
+    void update(long ID, T t);
     void delete(Long ID);
 
 }

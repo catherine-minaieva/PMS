@@ -19,8 +19,8 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Override
     public Developer findByID(Long id) {
-        Optional<Developer> byId = repository.findById(id);
-        return byId;
+       //Optional<Developer> byId = repository.findById(id);
+        return null;
     }
 
     @Override
@@ -35,7 +35,8 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
-    public void update(Developer developer) {
+    public void update(long ID, Developer developer) {
+        repository.update(ID, developer);
     }
 
     @Override

@@ -29,9 +29,9 @@ public class GetDeveloper implements Command {
         int idPosition = 1;
         String id = input.getParameters()[idPosition];
         Long developerID = Long.parseLong(id);
-        Optional<Developer> developer = developerRepository.findById(developerID);
+        Developer developer = service.findByID(developerID);
 
-        if (developer.isEmpty())
+        if (developer.isEmpty)
             throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
     }
 }

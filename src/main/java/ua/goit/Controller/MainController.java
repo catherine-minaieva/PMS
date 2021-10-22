@@ -1,5 +1,6 @@
 package ua.goit.Controller;
 
+import ua.goit.Controller.CompanyController.CreateCompany;
 import ua.goit.Controller.DeveloperController.CreateDeveloper;
 import ua.goit.Controller.DeveloperController.DeleteDeveloper;
 import ua.goit.Controller.DeveloperController.GetAllDevelopers;
@@ -8,6 +9,7 @@ import ua.goit.View.InputString;
 import ua.goit.View.View;
 import ua.goit.exeption.ExitException;
 import ua.goit.repositoty.DeveloperRepositoryImpl;
+import ua.goit.service.CompanyService;
 import ua.goit.service.DeveloperServiceImpl;
 
 import java.util.Arrays;
@@ -21,11 +23,13 @@ public class MainController {
         this.view = view;
         DeveloperServiceImpl developerService = new DeveloperServiceImpl(new DeveloperRepositoryImpl());
         DeveloperRepositoryImpl developerRepository = new DeveloperRepositoryImpl();
+        CompanyService companyService = new CompanyService();
         this.commands = Arrays.asList(
                 new CreateDeveloper(view, developerService),
                 new DeleteDeveloper(view, developerRepository),
                 new GetDeveloper(view, developerService),
                 new GetAllDevelopers(view, developerService),
+                new CreateCompany(view,companyService),
                 new Exit(view)
         );
     }
