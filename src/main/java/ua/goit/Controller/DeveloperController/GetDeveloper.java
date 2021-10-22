@@ -4,7 +4,10 @@ import ua.goit.Controller.Command;
 import ua.goit.View.Commands;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
+import ua.goit.model.Developer;
 import ua.goit.service.DeveloperServiceImpl;
+
+import java.util.Optional;
 
 public class GetDeveloper implements Command {
 
@@ -23,6 +26,12 @@ public class GetDeveloper implements Command {
 
     @Override
     public void process(InputString input) {
+        int idPosition = 1;
+        String id = input.getParameters()[idPosition];
+        Long developerID = Long.parseLong(id);
+        Optional<Developer> developer = developerRepository.findById(developerID);
 
+        if (developer.isEmpty())
+            throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
     }
 }

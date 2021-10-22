@@ -11,8 +11,8 @@ import ua.goit.repositoty.DeveloperRepositoryImpl;
 import java.util.Optional;
 
 public class DeleteDeveloper implements Command {
-    private View view;
-    private DeveloperRepositoryImpl developerRepository;
+    private final View view;
+    private final DeveloperRepositoryImpl developerRepository;
 
     public DeleteDeveloper(View view, DeveloperRepositoryImpl developerRepository ) {
         this.view = view;
@@ -27,7 +27,9 @@ public class DeleteDeveloper implements Command {
     @Override
     public void process(InputString input) {
 
-        Long developerID = Long.parseLong(String.valueOf((input)));
+        int idPosition = 1;
+        String id = input.getParameters()[idPosition];
+        Long developerID = Long.parseLong(id);
         Optional<Developer> developer = developerRepository.findById(developerID);
 
         if (developer.isEmpty())
