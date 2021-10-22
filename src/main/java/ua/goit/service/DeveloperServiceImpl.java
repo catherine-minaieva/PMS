@@ -6,18 +6,21 @@ import ua.goit.repositoty.DeveloperRepositoryImpl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
-public class DeveloperServiceImpl implements DeveloperService{
+public class DeveloperServiceImpl implements DeveloperService {
 
     private final DeveloperRepositoryImpl repository;
 
     public DeveloperServiceImpl(DeveloperRepositoryImpl repository){
+
         this.repository = repository;
     }
 
     @Override
     public Developer findByID(Long id) {
-        return null;
+      //return repository.findById(id);
+          return null;
     }
 
     @Override
