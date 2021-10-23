@@ -13,7 +13,6 @@ public class DeveloperServiceImpl implements DeveloperService {
     private final DeveloperRepositoryImpl repository;
 
     public DeveloperServiceImpl(DeveloperRepositoryImpl repository){
-
         this.repository = repository;
     }
 

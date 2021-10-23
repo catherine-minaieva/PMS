@@ -3,8 +3,6 @@ package ua.goit.service;
 import ua.goit.View.InputString;
 import ua.goit.model.Company;
 import ua.goit.repositoty.CompanyRepositoryImpl;
-
-
 import java.util.Collection;
 import java.util.List;
 
@@ -33,11 +31,12 @@ public class CompanyService implements BaseService <Company> {
 
     @Override
     public void update(long ID, Company company) {
-
+        repository.update(ID, company);
     }
 
     @Override
     public void delete(Long ID) {
+        repository.deleteById(ID);
     }
 
     public Company mapCompany(InputString input) {

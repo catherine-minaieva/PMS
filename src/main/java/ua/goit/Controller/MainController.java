@@ -1,19 +1,15 @@
 package ua.goit.Controller;
 
-import ua.goit.Controller.CompanyController.CreateCompany;
-import ua.goit.Controller.CompanyController.DeleteCompany;
-import ua.goit.Controller.CompanyController.GetAllCompanies;
-import ua.goit.Controller.DeveloperController.CreateDeveloper;
-import ua.goit.Controller.DeveloperController.DeleteDeveloper;
-import ua.goit.Controller.DeveloperController.GetAllDevelopers;
-import ua.goit.Controller.DeveloperController.GetDeveloper;
+import ua.goit.Controller.CompanyController.*;
+import ua.goit.Controller.CustomerController.*;
+import ua.goit.Controller.DeveloperController.*;
+import ua.goit.Controller.ProjectController.*;
+import ua.goit.Controller.SkillContoller.*;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
 import ua.goit.exeption.ExitException;
-import ua.goit.repositoty.CompanyRepositoryImpl;
-import ua.goit.repositoty.DeveloperRepositoryImpl;
-import ua.goit.service.CompanyService;
-import ua.goit.service.DeveloperServiceImpl;
+import ua.goit.repositoty.*;
+import ua.goit.service.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,18 +22,40 @@ public class MainController {
         this.view = view;
         DeveloperServiceImpl developerService = new DeveloperServiceImpl(new DeveloperRepositoryImpl());
         CompanyService companyService = new CompanyService(new CompanyRepositoryImpl());
-
-
+        CustomerService customerService = new CustomerService(new CustomerRepositoryImpl());
+        ProjectService projectService = new ProjectService(new ProjectRepositoryImpl());
+        SkillService skillService = new SkillService(new SkillRepositoryImpl());
         this.commands = Arrays.asList(
 
                 new CreateDeveloper(view, developerService),
                 new DeleteDeveloper(view, developerService),
                 new GetDeveloper(view, developerService),
                 new GetAllDevelopers(view, developerService),
+                new UpdateDeveloper(view, developerService),
 
-                new CreateCompany(view,companyService),
+                new CreateCompany(view, companyService),
                 new DeleteCompany(view, companyService),
                 new GetAllCompanies(view, companyService),
+                new UpdateCompany(view, companyService),
+                new GetCompany(view, companyService),
+
+                new CreateCustomer(view, customerService),
+                new DeleteCustomer(view, customerService),
+                new UpdateCustomer(view, customerService),
+                new GetCustomer(view, customerService),
+                new GetAllCustomers(view, customerService),
+
+                new CreateProject(view, projectService),
+                new DeleteProject(view, projectService),
+                new UpdateProject(view, projectService),
+                new GetProject(view, projectService),
+                new GetAllProjects(view, projectService),
+
+                new CreateSkill(view, skillService),
+                new DeleteSkill(view, skillService),
+                new UpdateSkill(view, skillService),
+                new GetSkill(view, skillService),
+                new GetAllSkills(view, skillService),
 
                 new Exit(view)
         );
