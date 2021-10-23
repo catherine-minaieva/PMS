@@ -25,11 +25,11 @@ public class Commands {
     public static final String GET_CUSTOMER = "get_customer|id";
     public static final String GET_COMPANY = "get_company|id";
 
-    public static final String UPDATE_DEVELOPER = "update_developer|id";
-    public static final String UPDATE_PROJECT = "update_project|id";
-    public static final String UPDATE_SKILL = "update_skill|id";
-    public static final String UPDATE_CUSTOMER = "update_customer|id";
-    public static final String UPDATE_COMPANY = "update_company|id";
+    public static final String UPDATE_DEVELOPER = "update_developer|id|name|age|gender|salary";
+    public static final String UPDATE_PROJECT = "update_project|id|name|base_technology|creation_date|cost";
+    public static final String UPDATE_SKILL = "update_skill|id|language|level";
+    public static final String UPDATE_CUSTOMER = "update_customer|id|name|tax_code|head_office";
+    public static final String UPDATE_COMPANY = "update_company|id|name|head_office";
 
     public static final String GET_SUM_OF_PROJECT = "get_sum_of_project|id";
     public static final String GET_PROJECTS_DATE = "get_projects_with_date";
