@@ -23,6 +23,6 @@ public class GetAllSkills implements Command {
 
     @Override
     public void process(InputString input) {
-
+        service.findAll().forEach(System.out::println);
     }
 }

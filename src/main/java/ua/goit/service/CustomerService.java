@@ -3,7 +3,6 @@ package ua.goit.service;
 import ua.goit.View.InputString;
 import ua.goit.model.Customer;
 import ua.goit.repositoty.CustomerRepositoryImpl;
-
 import java.util.Collection;
 import java.util.List;
 

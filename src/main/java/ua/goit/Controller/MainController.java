@@ -4,6 +4,7 @@ import ua.goit.Controller.CompanyController.*;
 import ua.goit.Controller.CustomerController.*;
 import ua.goit.Controller.DeveloperController.*;
 import ua.goit.Controller.ProjectController.*;
+import ua.goit.Controller.QueryController.*;
 import ua.goit.Controller.SkillContoller.*;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainController {
-    private View view;
+    private final View view;
     private List<Command> commands;
 
     public MainController(View view) {
@@ -25,6 +26,7 @@ public class MainController {
         CustomerService customerService = new CustomerService(new CustomerRepositoryImpl());
         ProjectService projectService = new ProjectService(new ProjectRepositoryImpl());
         SkillService skillService = new SkillService(new SkillRepositoryImpl());
+        QueryServiceImpl queryService = new QueryServiceImpl(new QueryRepositotyImpl());
         this.commands = Arrays.asList(
 
                 new CreateDeveloper(view, developerService),
@@ -56,6 +58,12 @@ public class MainController {
                 new UpdateSkill(view, skillService),
                 new GetSkill(view, skillService),
                 new GetAllSkills(view, skillService),
+
+                new GetSumOfSalariesForProject(view, queryService),
+                new GetDevelopersByLanguage(view,queryService),
+                new GetDevelopersByLevel(view, queryService),
+                new GetDevelopersOfProject(view, queryService),
+                new GetProjectsWithDate(view, queryService),
 
                 new Exit(view)
         );
