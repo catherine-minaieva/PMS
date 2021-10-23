@@ -17,11 +17,10 @@ public class SkillService implements BaseService<Skill> {
 
     @Override
     public void create(Skill skill) {
-
     }
 
     @Override
-    public void update(Skill skill) {
+    public void update(long ID, Skill skill) {
 
     }
 

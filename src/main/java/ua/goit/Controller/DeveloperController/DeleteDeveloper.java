@@ -4,19 +4,15 @@ import ua.goit.Controller.Command;
 import ua.goit.View.Commands;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
-import ua.goit.model.Developer;
-import ua.goit.repositoty.DeveloperRepositoryImpl;
-
-
-import java.util.Optional;
+import ua.goit.service.DeveloperService;
 
 public class DeleteDeveloper implements Command {
     private final View view;
-    private final DeveloperRepositoryImpl developerRepository;
+    private final DeveloperService service;
 
-    public DeleteDeveloper(View view, DeveloperRepositoryImpl developerRepository ) {
+    public DeleteDeveloper(View view, DeveloperService service) {
         this.view = view;
-        this.developerRepository = developerRepository;
+        this.service = service;
     }
 
     @Override
@@ -30,12 +26,11 @@ public class DeleteDeveloper implements Command {
         int idPosition = 1;
         String id = input.getParameters()[idPosition];
         Long developerID = Long.parseLong(id);
-        Optional<Developer> developer = developerRepository.findById(developerID);
 
-        if (developer.isEmpty())
-            throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
+        //if (!developer.isPresent())
+           // throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
 
-        developerRepository.deleteById(developerID);
+        service.delete(developerID);
         view.write("Developer deleted");
     }
 }

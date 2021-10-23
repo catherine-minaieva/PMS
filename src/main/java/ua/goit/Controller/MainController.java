@@ -1,6 +1,8 @@
 package ua.goit.Controller;
 
 import ua.goit.Controller.CompanyController.CreateCompany;
+import ua.goit.Controller.CompanyController.DeleteCompany;
+import ua.goit.Controller.CompanyController.GetAllCompanies;
 import ua.goit.Controller.DeveloperController.CreateDeveloper;
 import ua.goit.Controller.DeveloperController.DeleteDeveloper;
 import ua.goit.Controller.DeveloperController.GetAllDevelopers;
@@ -8,6 +10,7 @@ import ua.goit.Controller.DeveloperController.GetDeveloper;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
 import ua.goit.exeption.ExitException;
+import ua.goit.repositoty.CompanyRepositoryImpl;
 import ua.goit.repositoty.DeveloperRepositoryImpl;
 import ua.goit.service.CompanyService;
 import ua.goit.service.DeveloperServiceImpl;
@@ -22,14 +25,20 @@ public class MainController {
     public MainController(View view) {
         this.view = view;
         DeveloperServiceImpl developerService = new DeveloperServiceImpl(new DeveloperRepositoryImpl());
-        DeveloperRepositoryImpl developerRepository = new DeveloperRepositoryImpl();
-        CompanyService companyService = new CompanyService();
+        CompanyService companyService = new CompanyService(new CompanyRepositoryImpl());
+
+
         this.commands = Arrays.asList(
+
                 new CreateDeveloper(view, developerService),
-                new DeleteDeveloper(view, developerRepository),
+                new DeleteDeveloper(view, developerService),
                 new GetDeveloper(view, developerService),
                 new GetAllDevelopers(view, developerService),
+
                 new CreateCompany(view,companyService),
+                new DeleteCompany(view, companyService),
+                new GetAllCompanies(view, companyService),
+
                 new Exit(view)
         );
     }

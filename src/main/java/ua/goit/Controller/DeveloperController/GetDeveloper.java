@@ -31,7 +31,9 @@ public class GetDeveloper implements Command {
         Long developerID = Long.parseLong(id);
         Developer developer = service.findByID(developerID);
 
-        if (developer.isEmpty)
+        if (developer == null)
             throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
+
+        view.write(developer.toString());
     }
 }

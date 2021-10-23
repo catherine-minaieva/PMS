@@ -21,7 +21,7 @@ public class CustomerService implements BaseService<Customer> {
     }
 
     @Override
-    public void update(Customer customer) {
+    public void update(long ID, Customer customer) {
 
     }
 

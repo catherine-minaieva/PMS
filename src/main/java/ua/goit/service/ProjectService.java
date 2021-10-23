@@ -21,7 +21,7 @@ public class ProjectService implements BaseService<Project>{
     }
 
     @Override
-    public void update(Project project) {
+    public void update(long ID, Project project) {
 
     }
 

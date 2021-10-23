@@ -27,6 +27,6 @@ public class CreateCompany implements Command {
         Company company = service.
                 mapCompany(input);
         service.create(company);
-        view.write(String.format("Developer created with name - %s", company.getName()));
+        view.write(String.format("Company created with name - %s", company.getName()));
     }
 }
