@@ -24,9 +24,14 @@ public class UpdateCompany implements Command {
 
     @Override
     public void process(InputString input) {
-        Company company = service.
-                mapCompany(input);
-        service.create(company);
+        int idPosition = 1;
+        String id = input.getParameters()[idPosition];
+        Long companyId = Long.parseLong(id);
+        Company company = service.findByID(companyId);
+
+        if (company.getID() == null)
+            throw new IllegalArgumentException(String.format("Company with id %d not exist", companyId));
+        service.update(companyId, company);
         view.write(String.format("Company with name - %s updated", company.getName()));
     }
 }

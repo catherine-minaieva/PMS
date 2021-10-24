@@ -23,6 +23,8 @@ public class GetDevelopersByLevel implements Command {
 
     @Override
     public void process(InputString input) {
-
+        int idPosition = 1;
+        String level = input.getParameters()[idPosition];
+        service.developersByLevel(level).forEach(System.out::println);
     }
 }

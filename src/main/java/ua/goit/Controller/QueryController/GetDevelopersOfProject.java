@@ -23,6 +23,9 @@ public class GetDevelopersOfProject implements Command {
 
     @Override
     public void process(InputString input) {
-
+        int idPosition = 1;
+        String id = input.getParameters()[idPosition];
+        Long projectId = Long.parseLong(id);
+        service.developersOfProject(projectId).forEach(System.out::println);
     }
 }

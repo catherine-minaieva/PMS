@@ -59,7 +59,7 @@ public class MainController {
                 new GetSkill(view, skillService),
                 new GetAllSkills(view, skillService),
 
-                new GetSumOfSalariesForProject(view, queryService),
+                new GetSumOfSalariesForProject(view, queryService, projectService),
                 new GetDevelopersByLanguage(view,queryService),
                 new GetDevelopersByLevel(view, queryService),
                 new GetDevelopersOfProject(view, queryService),

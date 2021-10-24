@@ -22,6 +22,6 @@ public class GetProjectsWithDate implements Command {
 
     @Override
     public void process(InputString input) {
-
+        System.out.println(service.projectsWithDate());
     }
 }
