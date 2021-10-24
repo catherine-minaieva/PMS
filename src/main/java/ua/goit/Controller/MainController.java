@@ -59,7 +59,7 @@ public class MainController {
                 new GetSkill(view, skillService),
                 new GetAllSkills(view, skillService),
 
-                new GetSumOfSalariesForProject(view, queryService, projectService),
+                new GetSumOfSalariesForProject(view, queryService),
                 new GetDevelopersByLanguage(view,queryService),
                 new GetDevelopersByLevel(view, queryService),
                 new GetDevelopersOfProject(view, queryService),
@@ -75,7 +75,7 @@ public class MainController {
         try {
             doCommand();
         } catch (ExitException e) {
-
+            e.printStackTrace();
         }
     }
 

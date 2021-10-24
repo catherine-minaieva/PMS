@@ -4,7 +4,6 @@ import ua.goit.Controller.Command;
 import ua.goit.View.Commands;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
-import ua.goit.model.Project;
 import ua.goit.service.ProjectService;
 import ua.goit.service.QueryServiceImpl;
 
@@ -14,10 +13,9 @@ public class GetSumOfSalariesForProject implements Command {
     private QueryServiceImpl service;
     private ProjectService projectService;
 
-    public GetSumOfSalariesForProject(View view, QueryServiceImpl service, ProjectService projectService) {
+    public GetSumOfSalariesForProject(View view, QueryServiceImpl service) {
         this.view = view;
         this.service = service;
-        this.projectService = projectService;
     }
 
     @Override
@@ -31,6 +29,6 @@ public class GetSumOfSalariesForProject implements Command {
         String id = input.getParameters()[idPosition];
         Long projectId = Long.parseLong(id);
 
-        service.sumOfSalariesForProject(projectId);
+        System.out.println(service.sumOfSalariesForProject(projectId));
     }
 }
