@@ -33,14 +33,14 @@ public class DeveloperRepositoryImpl implements BaseRepository<Developer, Long> 
 
     @SneakyThrows
     @Override
-    public Optional<Developer> findById(Long id) {
+    public Developer findById(Long id) {
         Developer developer = new Developer();
         PreparedStatement preparedStatement = CONNECTION.prepareStatement("SELECT * FROM " + SCHEMA_NAME + ".developers WHERE id=" + id);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             developer = buildDeveloper(resultSet);
         }
-        return Optional.ofNullable(developer);
+        return developer;
     }
 
     private Developer buildDeveloper(ResultSet resultSet) throws SQLException {

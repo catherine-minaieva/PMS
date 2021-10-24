@@ -31,8 +31,8 @@ public class SkillService implements BaseService<Skill> {
     }
 
     @Override
-    public void update(long ID, Skill skill) {
-        repository.update(ID, skill);
+    public void update(Long id, Skill skill) {
+        repository.update(id, skill);
     }
 
     @Override

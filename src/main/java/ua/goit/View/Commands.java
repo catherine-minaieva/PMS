@@ -39,5 +39,4 @@ public class Commands {
 
     public static final String EXIT = "exit";
 
-
 }

@@ -11,11 +11,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public class CompanyRepositoryImpl implements BaseRepository<Company, Long> {
+
     private final Connection CONNECTION = DbConnection.getInstance().getConnection();
     private final String SCHEMA_NAME = PropertiesLoader.getProperty("db.schemaName");
+
 
     @SneakyThrows
     @Override
@@ -44,7 +45,7 @@ public class CompanyRepositoryImpl implements BaseRepository<Company, Long> {
 
     @SneakyThrows
     @Override
-    public Optional<Company> findById(Long id) {
+    public Company findById(Long id) {
         Company company = new Company();
         final ResultSet resultSet = CONNECTION.createStatement().executeQuery("SELECT * FROM companies WHERE id=" + id + ";");
         while (resultSet.next()) {
@@ -54,7 +55,7 @@ public class CompanyRepositoryImpl implements BaseRepository<Company, Long> {
                     .headOffice(resultSet.getString("head_office"))
                     .build();
         }
-        return Optional.ofNullable(company);
+        return company;
     }
 
     @SneakyThrows

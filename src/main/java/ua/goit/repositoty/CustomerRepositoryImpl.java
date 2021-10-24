@@ -39,7 +39,7 @@ public class CustomerRepositoryImpl implements BaseRepository<Customer, Long> {
 
     @SneakyThrows
     @Override
-    public Optional<Customer> findById(Long id) {
+    public Customer findById(Long id) {
         ResultSet resultSet = CONNECTION.createStatement().executeQuery("SELECT * FROM customers WHERE id=" + id + ";");
         Customer customer = new Customer();
         while (resultSet.next()) {
@@ -50,7 +50,7 @@ public class CustomerRepositoryImpl implements BaseRepository<Customer, Long> {
                     .headOffice(resultSet.getString("head_office"))
                     .build();
         }
-        return Optional.ofNullable(customer);
+        return customer;
     }
 
     @SneakyThrows

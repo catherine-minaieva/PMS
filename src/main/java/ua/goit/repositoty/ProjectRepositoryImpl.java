@@ -33,14 +33,14 @@ public class ProjectRepositoryImpl implements BaseRepository<Project, Long> {
 
     @SneakyThrows
     @Override
-    public Optional<Project> findById(Long id) {
+    public Project findById(Long id) {
 
         Project project = new Project();
         ResultSet resultSet = CONNECTION.createStatement().executeQuery("SELECT * FROM projects WHERE id=" + id + ";");
         while (resultSet.next()) {
             project = buildProject(resultSet);
         }
-        return Optional.ofNullable(project);
+        return project;
     }
 
     private Project buildProject(ResultSet resultSet) throws SQLException {

@@ -30,8 +30,8 @@ public class CompanyService implements BaseService <Company> {
         repository.create(company);    }
 
     @Override
-    public void update(long ID, Company company) {
-        repository.update(ID, company);
+    public void update(Long id, Company company) {
+        repository.update(id, company);
     }
 
     @Override

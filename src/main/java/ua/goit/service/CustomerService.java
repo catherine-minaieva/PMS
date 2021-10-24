@@ -31,8 +31,8 @@ public class CustomerService implements BaseService<Customer> {
     }
 
     @Override
-    public void update(long ID, Customer customer) {
-        repository.update(ID, customer);
+    public void update(Long id, Customer customer) {
+        repository.update(id, customer);
     }
 
     @Override

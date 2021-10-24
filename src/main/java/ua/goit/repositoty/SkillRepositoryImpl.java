@@ -42,7 +42,7 @@ public class SkillRepositoryImpl implements BaseRepository<Skill, Long> {
 
     @SneakyThrows
     @Override
-    public Optional<Skill> findById(Long id) {
+    public Skill findById(Long id) {
         Skill skill = new Skill();
         ResultSet resultSet = CONNECTION.createStatement().executeQuery("SELECT * FROM skills WHERE id=" + id + ";");
         while (resultSet.next()) {skill = Skill.builder()
@@ -51,7 +51,7 @@ public class SkillRepositoryImpl implements BaseRepository<Skill, Long> {
                 .level(resultSet.getString("level"))
                 .build();
         }
-        return Optional.ofNullable(skill);
+        return skill;
     }
 
     @SneakyThrows
@@ -61,7 +61,7 @@ public class SkillRepositoryImpl implements BaseRepository<Skill, Long> {
         return getSkill(skill, preparedStatement);
     }
 
-        @SneakyThrows
+    @SneakyThrows
     @Override
     public Skill update(Long id, Skill skill) {
         PreparedStatement preparedStatement = CONNECTION.prepareStatement("UPDATE " + SCHEMA_NAME + ".skills set language =?,level=? WHERE id=" + id + ";");

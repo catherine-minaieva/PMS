@@ -3,7 +3,6 @@ package ua.goit.service;
 import ua.goit.View.InputString;
 import ua.goit.model.Developer;
 import ua.goit.repositoty.DeveloperRepositoryImpl;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +17,7 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Override
     public Developer findByID(Long id) {
-        Optional<Developer> developer = repository.findById(id);
-        return null;
+        return repository.findById(id);
     }
 
     @Override
@@ -34,8 +32,8 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
-    public void update(long ID, Developer developer) {
-        repository.update(ID, developer);
+    public void update(Long id, Developer developer) {
+        repository.update(id, developer);
     }
 
     @Override

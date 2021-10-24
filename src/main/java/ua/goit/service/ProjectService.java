@@ -1,7 +1,6 @@
 package ua.goit.service;
 
 import ua.goit.View.InputString;
-import ua.goit.model.Company;
 import ua.goit.model.Project;
 import ua.goit.repositoty.ProjectRepositoryImpl;
 import java.util.Collection;
@@ -31,10 +30,9 @@ public class ProjectService implements BaseService<Project>{
         repository.create(project);
     }
 
-
     @Override
-    public void update(long ID, Project project) {
-        repository.update(ID, project);
+    public void update(Long id, Project project) {
+        repository.update(id, project);
     }
 
     @Override

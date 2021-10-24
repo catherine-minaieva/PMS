@@ -24,8 +24,11 @@ public class UpdateDeveloper implements Command {
 
     @Override
     public void process(InputString input) {
+        int idPosition = 1;
+        String id = input.getParameters()[idPosition];
+        Long developerID = Long.parseLong(id);
         Developer developer = service.mapDeveloper(input);
-        service.update(developer);
+        service.update(developerID,developer);
         view.write(String.format("Developer with name - %s updated", developer.getName()));
     }
 }
