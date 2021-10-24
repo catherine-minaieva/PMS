@@ -31,10 +31,6 @@ public class GetSumOfSalariesForProject implements Command {
         String id = input.getParameters()[idPosition];
         Long projectId = Long.parseLong(id);
 
-        Project project = projectService.findByID(projectId);
-
-        if (project.getID() == null)
-            throw new IllegalArgumentException(String.format("Project with id %d not exist", projectId));
-        service.sumOfSalariesForProject(project.getID());
+        service.sumOfSalariesForProject(projectId);
     }
 }
