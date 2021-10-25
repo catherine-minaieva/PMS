@@ -27,8 +27,13 @@ public class UpdateDeveloper implements Command {
         int idPosition = 1;
         String id = input.getParameters()[idPosition];
         Long developerID = Long.parseLong(id);
-        Developer developer = service.mapDeveloper(input);
-        service.update(developerID,developer);
+        Developer developer = service.findByID(developerID);
+
+       if (developer.getID() == null)
+            throw new IllegalArgumentException(String.format("Developer with id %d not exist", developerID));
+
+        Developer developerForUpdate = service.mapDeveloper(input);
+        service.update(developerID,developerForUpdate);
         view.write(String.format("Developer with name - %s updated", developer.getName()));
     }
 }

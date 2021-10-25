@@ -16,7 +16,7 @@ public class CustomerService implements BaseService<Customer> {
 
     @Override
     public Customer findByID(Long id) {
-        return null;
+        return repository.findById(id);
     }
 
     @Override

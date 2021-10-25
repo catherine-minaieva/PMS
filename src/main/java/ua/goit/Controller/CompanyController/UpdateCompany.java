@@ -31,7 +31,9 @@ public class UpdateCompany implements Command {
 
         if (company.getID() == null)
             throw new IllegalArgumentException(String.format("Company with id %d not exist", companyId));
-        service.update(companyId, company);
+
+        Company companyForUpdate = service.mapCompany(input);
+        service.update(companyId, companyForUpdate);
         view.write(String.format("Company with name - %s updated", company.getName()));
     }
 }

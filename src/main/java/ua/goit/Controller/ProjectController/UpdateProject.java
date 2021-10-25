@@ -24,8 +24,15 @@ public class UpdateProject implements Command {
 
     @Override
     public void process(InputString input) {
-        Project project = service.mapProject(input);
-        service.create(project);
+        int idPosition = 1;
+        String id = input.getParameters()[idPosition];
+        Long projectId = Long.parseLong(id);
+        Project project = service.findByID(projectId);
+        if (project.getID() == null)
+            throw new IllegalArgumentException(String.format("Company with id %d not exist", projectId));
+
+        Project projectForUpdate = service.mapProject(input);
+        service.update(projectId, projectForUpdate);
         view.write(String.format("Project with name - %s updated", project.getName()));
     }
 }

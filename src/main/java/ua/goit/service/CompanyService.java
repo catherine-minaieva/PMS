@@ -16,7 +16,7 @@ public class CompanyService implements BaseService <Company> {
 
     @Override
     public Company findByID(Long id) {
-        return null;
+        return repository.findById(id);
     }
 
     @Override

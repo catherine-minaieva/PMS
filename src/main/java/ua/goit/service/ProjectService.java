@@ -16,7 +16,7 @@ public class ProjectService implements BaseService<Project>{
 
     @Override
     public Project findByID(Long id) {
-        return null;
+        return repository.findById(id);
     }
 
     @Override

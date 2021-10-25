@@ -24,8 +24,14 @@ public class UpdateSkill implements Command {
 
     @Override
     public void process(InputString input) {
-        Skill skill = service.mapSkill(input);
-        service.create(skill);
+        int idPosition = 1;
+        String id = input.getParameters()[idPosition];
+        Long skillId = Long.parseLong(id);
+        Skill skill = service.findByID(skillId);
+        if (skill.getID() == null)
+            throw new IllegalArgumentException(String.format("Company with id %d not exist", skillId));
+        Skill skillForUpdate = service.mapSkill(input);
+        service.update(skillId, skillForUpdate);
         view.write(String.format("Skill created - %s", skill.getLanguage(), skill.getLevel()));
     }
 }

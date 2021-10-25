@@ -16,7 +16,7 @@ public class SkillService implements BaseService<Skill> {
 
     @Override
     public Skill findByID(Long id) {
-        return null;
+        return repository.findById(id);
     }
 
     @Override
