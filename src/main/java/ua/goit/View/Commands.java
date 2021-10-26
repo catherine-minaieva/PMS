@@ -37,6 +37,7 @@ public class Commands {
     public static final String GET_DEVELOPERS_LANGUAGE = "get_developers_language|language";
     public static final String GET_DEVELOPERS_PROJECT = "get_developers_project|id";
 
+    public static final String HELP = "help";
     public static final String EXIT = "exit";
 
 }

@@ -3,6 +3,7 @@ package ua.goit.Controller;
 import ua.goit.View.Commands;
 import ua.goit.View.InputString;
 import ua.goit.View.View;
+import ua.goit.exeption.ExitException;
 
 public class Exit implements Command{
     private View view;
@@ -19,6 +20,6 @@ public class Exit implements Command{
     @Override
     public void process(InputString input) {
         view.write("Good bye");
-        throw new RuntimeException("Exit");
+        throw new ExitException("Exit");
     }
 }

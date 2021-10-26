@@ -60,38 +60,18 @@ public class MainController {
                 new GetAllSkills(view, skillService),
 
                 new GetSumOfSalariesForProject(view, queryService),
-                new GetDevelopersByLanguage(view,queryService),
+                new GetDevelopersByLanguage(view, queryService),
                 new GetDevelopersByLevel(view, queryService),
                 new GetDevelopersOfProject(view, queryService),
                 new GetProjectsWithDate(view, queryService),
 
+                new Help(view),
                 new Exit(view)
         );
     }
 
     public void read() {
-        view.write("""
-                Hello! This is the Project Management System
-
-                For create or update an object you can use commands create|update with the same arguments in such way:
-                create_developer|id|name|age|gender|salary
-                create_project|id|name|base_technology|creation_date|cost
-                create_customer|id|name|tax_code|head_office
-                create_skill|id|language|level
-                create_company|id|name|head_office
-
-                get_all_developers   or  (projects|customers|companies|skills)
-                get_developer|id     or  (project|customer|company|skill)
-                delete_developer|id  or (project|customer|company|skill)
-
-                You can also use commands:
-                get_sum_of_project|id
-                get_projects_with_date
-                get_developers_level|level
-                get_developers_language|language
-                get_developers_project|id
-                """);
-
+        view.write("Hello! This is the Project Management System.");
         view.write("Enter a command:");
         try {
             doCommand();
