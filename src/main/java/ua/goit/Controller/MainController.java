@@ -83,11 +83,11 @@ public class MainController {
     private void doCommand() {
         while (true) {
             InputString entry = new InputString(view.read());
-            for (Command command : commands) {
+            for (int i = 0; i < commands.size(); i++) {
                 try {
-                    if (command.canProcess(entry)) {
-                        entry.validateParameters(command.command());
-                        command.process(entry);
+                    if (commands.get(i).canProcess(entry)) {
+                        entry.validateParameters(commands.get(i).command());
+                        commands.get(i).process(entry);
                         break;
                     }
                 } catch (Exception e) {
@@ -96,6 +96,9 @@ public class MainController {
                     }
                     printError(e);
                     break;
+                }
+                if (i == commands.size() - 1) {
+                    view.write("No such command. Please, try again or enter Help to look at list of commands");
                 }
             }
         }
